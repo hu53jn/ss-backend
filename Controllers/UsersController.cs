@@ -32,14 +32,14 @@ namespace ss_backend.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDto loginDto)
         {
-            var _loginResDto =  _unitOfWork.UserRepository.Authenticate(loginDto.Email, loginDto.Password);
+            var _loginResDto =  _unitOfWork.UserRepository.Authenticate(loginDto.Username, loginDto.Password);
             if(_loginResDto == null)
             {
                 return Unauthorized();
             }
 
             var loginResDto = new LoginResDto();
-            loginResDto.Email = _loginResDto.Email;
+            loginResDto.Username = _loginResDto.Username;
             loginResDto.Token = _loginResDto.Token;
             loginResDto.Role = _loginResDto.Role;
 
@@ -51,9 +51,9 @@ namespace ss_backend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {
-            bool uniqueEmail = _unitOfWork.UserRepository.UniqueEmail(user.Email);
+            bool uniqueUsername = _unitOfWork.UserRepository.UniqueUsername(user.Username);
 
-            if (uniqueEmail)
+            if (uniqueUsername)
             {
                 return BadRequest();
             }
@@ -63,10 +63,10 @@ namespace ss_backend.Controllers
         }
 
         //GET api/user/getUserInfo
-        [HttpGet("getUserInfo/{email}")]
-        public ActionResult<UserInfoDto> GetSecretSanta(string email)
+        [HttpGet("getUserInfo/{username}")]
+        public ActionResult<UserInfoDto> GetSecretSanta(string username)
         {
-            User user =  _unitOfWork.UserRepository.GetUserInfo(email);
+            User user =  _unitOfWork.UserRepository.GetUserInfo(username);
 
             if (user != null)
             {

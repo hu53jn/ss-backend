@@ -25,9 +25,9 @@ namespace ss_backend.Data.Repo
             _appSettings = appSettings;
         }
 
-        public LoginResDto Authenticate(string email, string password)
+        public LoginResDto Authenticate(string username, string password)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Email == email && x.Password == password);
+            var user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
             if (user == null)
             {
@@ -54,7 +54,7 @@ namespace ss_backend.Data.Repo
                 loginResDto.Role = user.Role;
             }
             loginResDto.Token = tokenHandler.WriteToken(token);
-            loginResDto.Email = user.Email;
+            loginResDto.Username = user.Username;
 
             return loginResDto;
         }
@@ -69,15 +69,15 @@ namespace ss_backend.Data.Repo
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public User GetUserInfo(string email)
+        public User GetUserInfo(string username)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Email == email);
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
             return user;
         }
-        public bool UniqueEmail(string email)
+        public bool UniqueUsername(string username)
         {
-            var user = _context.Users.Where(x => x.Email == email);
+            var user = _context.Users.Where(x => x.Username == username);
             if (user.Any())
             {
                 return true;

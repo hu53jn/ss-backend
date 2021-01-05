@@ -54,9 +54,9 @@ namespace ss_backend.Data.Repo
 
         }
 
-        public bool UniqueEmail(string email)
+        public bool UniqueUsername(string username)
         {
-            var employee = _context.Employees.Where(x => x.Email == email);
+            var employee = _context.Employees.Where(x => x.Username == username);
             if(employee.Any())
             {
                 return true;
@@ -67,9 +67,9 @@ namespace ss_backend.Data.Repo
             }
         }
 
-        public async Task<Employee> GetSecretSanta(string email)
+        public async Task<Employee> GetSecretSanta(string username)
         {
-            return await _context.Employees.FirstAsync(x => x.Email == email);
+            return await _context.Employees.FirstAsync(x => x.Username == username);
         }
 
     }

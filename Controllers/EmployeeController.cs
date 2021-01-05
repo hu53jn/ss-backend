@@ -73,15 +73,15 @@ namespace ss_backend.Controllers
         public async Task<ActionResult<Employee>> PostEmployee(EmployeeDto employeeDto)
         {
             var employee = new Employee();
-            employee.Email = employeeDto.Email;
+            employee.Username = employeeDto.Username;
             employee.FirstName = employeeDto.FirstName;
             employee.LastName = employeeDto.LastName;
             employee.SecretSanta = employeeDto.SecretSanta;
             employee.CompanyId = 1;
 
-            bool uniqueEmail = _unitOfWork.EmployeeRepository.UniqueEmail(employeeDto.Email);
+            bool uniqueUsername = _unitOfWork.EmployeeRepository.UniqueUsername(employeeDto.Username);
 
-            if (uniqueEmail)
+            if (uniqueUsername)
             {
                 return BadRequest("Employee already added!");
             }
@@ -114,15 +114,15 @@ namespace ss_backend.Controllers
         }
 
         //GET api/employee/getSecretSanta
-        [HttpGet("getSecretSanta/{email}")]
-        public async Task<ActionResult<EmployeeDto>> GetSecretSanta(string email)
+        [HttpGet("getSecretSanta/{username}")]
+        public async Task<ActionResult<EmployeeDto>> GetSecretSanta(string username)
         {
-            Employee secretSanta = await _unitOfWork.EmployeeRepository.GetSecretSanta(email);
+            Employee secretSanta = await _unitOfWork.EmployeeRepository.GetSecretSanta(username);
             
             if(secretSanta != null)
             {
                 EmployeeDto employeeDto = new EmployeeDto();
-                employeeDto.Email = secretSanta.Email;
+                employeeDto.Username = secretSanta.Username;
                 employeeDto.FirstName = secretSanta.FirstName;
                 employeeDto.LastName = secretSanta.LastName;
                 employeeDto.SecretSanta = secretSanta.SecretSanta;

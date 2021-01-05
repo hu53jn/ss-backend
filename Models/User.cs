@@ -9,8 +9,8 @@ namespace ss_backend.Models
     public class User
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Email is mandatory field!")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Username is mandatory field!")]
+        public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required(ErrorMessage = "Password is mandatory field!")]

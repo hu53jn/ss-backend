@@ -16,8 +16,8 @@ namespace ss_backend.Interfaces
         bool EmployeeExists(long employeeId);
         Task<bool> SaveAsync();
         Task<ActionResult<Employee>> GetEmployee(long id);
-        bool UniqueEmail(string email);
-        Task<Employee> GetSecretSanta(string email);
+        bool UniqueUsername(string username);
+        Task<Employee> GetSecretSanta(string username);
 
     }
 }

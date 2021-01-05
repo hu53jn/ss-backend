@@ -9,11 +9,11 @@ namespace ss_backend.Interfaces
 {
     public interface IUserRepository
     {
-        LoginResDto Authenticate(string email, string password);
+        LoginResDto Authenticate(string username, string password);
         void RegisterUser(User user);
-        User GetUserInfo(string email);
+        User GetUserInfo(string username);
         Task<bool> SaveAsync();
-        bool UniqueEmail(string email);
+        bool UniqueUsername(string username);
 
     }
 }

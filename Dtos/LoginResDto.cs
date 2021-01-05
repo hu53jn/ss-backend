@@ -9,7 +9,7 @@ namespace ss_backend.Dtos
     public class LoginResDto
     {
         [Required]
-        public string Email { get; set; }
+        public string Username { get; set; }
         public string Token { get; set; }
         public string Role { get; set; }
     }
